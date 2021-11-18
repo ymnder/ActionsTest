@@ -1,0 +1,26 @@
+ame: Manual Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        required: true
+        default: "Please enter the date of submission (e.g. 12/01)"
+      title:
+        default: "Please enter the title"
+      author:
+        default: "Please enter the author's name"
+      environment:
+        type: environment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+    - name: Show inputs
+      run: |
+        echo "target: ${{ github.event.inputs.date }}"
+        echo "message: ${{ github.event.inputs.title }}"
+        echo "dryrun: ${{ github.event.inputs.author }}"
