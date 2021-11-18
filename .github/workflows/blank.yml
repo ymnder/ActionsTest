@@ -10,13 +10,10 @@ on:
         default: "Please enter the title"
       author:
         default: "Please enter the author's name"
-      environment:
-        type: environment
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
 
     steps:
     - name: Show inputs
