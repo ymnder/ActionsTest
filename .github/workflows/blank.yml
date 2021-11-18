@@ -19,4 +19,4 @@ jobs:
         echo "target: ${{ github.event.inputs.date }}"
         echo "message: ${{ github.event.inputs.title }}"
         echo "dryrun: ${{ github.event.inputs.author }}"
-        go version
+        ls
