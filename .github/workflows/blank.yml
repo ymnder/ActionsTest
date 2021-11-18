@@ -23,4 +23,4 @@ jobs:
         echo "dryrun: ${{ github.event.inputs.author }}"
     - name: run
       run: |
-        go run action.go -date=12/01 -title=tmp
+        go run ./action.go -date=12/01 -title=tmp
