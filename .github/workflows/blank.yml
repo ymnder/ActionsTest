@@ -21,4 +21,5 @@ jobs:
         echo "target: ${{ github.event.inputs.date }}"
         echo "message: ${{ github.event.inputs.title }}"
         echo "dryrun: ${{ github.event.inputs.author }}"
-        ls
+    - name: run
+      go run action.go -date=12/01 -title=tmp
