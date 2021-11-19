@@ -8,34 +8,22 @@ import (
 )
 
 func main() {
-
-	fmt.Println("---------------------------")
-
-	i := flag.String("date", "", "date")
-	s := flag.String("title", "", "title")
-	b := flag.String("description", "", "author")
+	dateArg := flag.String("date", "", "date")
+	titleArg := flag.String("title", "", "title")
+	authorArg := flag.String("author", "", "author")
 
 	flag.Parse()
-	fmt.Println(*i, *s, *b)
+	fmt.Println(*dateArg, *titleArg, *authorArg)
 
-	output, err := exec.Command("git", "switch", "-c", "tmp/a").CombinedOutput()
-	if err != nil {
-		exitProcess(output, err)
-	}
-	output, err = exec.Command("touch", "tmp.md").CombinedOutput()
-	if err != nil {
-		exitProcess(output, err)
-	}
-	output, err = exec.Command("git", "add", "tmp.md").CombinedOutput()
-	if err != nil {
-		exitProcess(output, err)
-	}
-	output, err = exec.Command("git", "commit", "-m", "add tmp.md").CombinedOutput()
-	if err != nil {
-		exitProcess(output, err)
-	}
+	runCommand("git", "switch", "-c", "tmp/a")
+	runCommand("touch", "tmp.md")
+	runCommand("git", "add", "tmp.md")
+	runCommand("git", "commit", "-m", "add tmp.md")
+	runCommand("hub", "pull-request", "--draft", "-m", "test title")
+}
 
-	output, err = exec.Command("hub", "pull-request", "--draft", "-m", "test title").CombinedOutput()
+func runCommand(name string, args ...string) {
+	output, err := exec.Command(name, args...).CombinedOutput()
 	if err != nil {
 		exitProcess(output, err)
 	}

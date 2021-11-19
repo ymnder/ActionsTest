@@ -18,9 +18,9 @@ jobs:
       uses: actions/checkout@v2
     - name: Show inputs
       run: |
-        echo "target: ${{ github.event.inputs.date }}"
-        echo "message: ${{ github.event.inputs.title }}"
-        echo "dryrun: ${{ github.event.inputs.author }}"
+        echo "date: ${{ github.event.inputs.date }}"
+        echo "title: ${{ github.event.inputs.title }}"
+        echo "author: ${{ github.event.inputs.author }}"
     - name: run
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
