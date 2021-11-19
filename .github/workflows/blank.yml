@@ -25,4 +25,8 @@ jobs:
       run: |
         git config user.name  "[bot] ${GITHUB_ACTOR}"
         git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        go run ./action.go -date=12/01 -title=tmp
+        # go run ./action.go -date=12/01 -title=tmp
+        touch file.md
+        git add file.md
+        git commit -m "tmp"
+        hub pull-request --draft -m test title
