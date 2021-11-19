@@ -5,11 +5,11 @@ on:
     inputs:
       date:
         required: true
-        default: "Please enter the date of submission (e.g. 12/01)"
+        description: "Please enter the date of submission (e.g. 12/01)"
       title:
-        default: "Please enter the title"
+        description: "Please enter the title"
       author:
-        default: "Please enter the author's name"
+        description: "Please enter the author's name"
 jobs:
   build:
     runs-on: ubuntu-latest
