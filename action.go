@@ -73,6 +73,7 @@ func createFile(publishDate string, title string, author string) error {
 }
 
 func runCommand(name string, args ...string) {
+	fmt.Println(exec.Command(name, args...).String())
 	output, err := exec.Command(name, args...).CombinedOutput()
 	if err != nil {
 		exitProcess(output, err)
