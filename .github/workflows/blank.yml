@@ -27,9 +27,8 @@ jobs:
       run: |
         ehco "${{ GITHUB_REF_NAME }}"
         git switch -c fix/tmp4
-        git switch ${{ GITHUB_REF_NAME }}
         ehco "${{ GITHUB_REF_NAME }}"
-        git switch main
+        git switch ${{ GITHUB_REF_NAME }}
         ehco "${{ GITHUB_REF_NAME }}"
         # git config user.name  "[bot] ${GITHUB_ACTOR}"
         # git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
