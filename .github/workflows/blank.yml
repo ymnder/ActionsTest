@@ -34,4 +34,4 @@ jobs:
         git commit -m "tmp2"
         # hub push origin fix/tmp2
         # git switch -
-        hub pull-request -p main --draft -m test title
+        hub pull-request -p -b=main -m test title
