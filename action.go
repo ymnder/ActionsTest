@@ -31,7 +31,7 @@ func main() {
 		return
 	}
 
-	// createBranch(publishDate)
+	createBranch(publishDate)
 }
 
 func parseDate(inputDate string) string {
@@ -86,6 +86,7 @@ func createBranch(publishDate string) {
 	runCommand("git", "switch", "-c", targetBranch)
 	runCommand("git", "add", outputDir+publishDate+".md")
 	runCommand("git", "commit", "-m", "Add a template")
+	runCommand("git", "push", "origin", targetBranch)
 	runCommand("gh", "pr", "create", "--title", publishDate+" Article", "--base", "${GITHUB_REF_NAME}")
 }
 
