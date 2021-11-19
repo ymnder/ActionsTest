@@ -32,6 +32,6 @@ jobs:
         touch file3.md
         git add file3.md
         git commit -m "tmp2"
-        hub push origin fix/tmp2
-        git switch -
-        hub pull-request --draft -m test title
+        # hub push origin fix/tmp2
+        # git switch -
+        hub pull-request -p -b main --draft -m test title
