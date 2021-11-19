@@ -23,4 +23,6 @@ jobs:
         echo "dryrun: ${{ github.event.inputs.author }}"
     - name: run
       run: |
+        git config user.name  "[bot] ${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         go run ./action.go -date=12/01 -title=tmp
