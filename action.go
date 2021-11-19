@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"regexp"
@@ -48,7 +49,7 @@ func createFile(publishDate string, title string, author string) error {
 		publishDateForLabel = publishDate
 	}
 
-	template, err := os.ReadFile(templateFile)
+	template, err := ioutil.ReadFile(templateFile)
 	if err != nil {
 		return err
 	}
@@ -62,7 +63,7 @@ func createFile(publishDate string, title string, author string) error {
 		article = strings.Replace(article, "[author]", author, -1)
 	}
 
-	err = os.WriteFile(outputDir+publishDate+".md", []byte(article), 0644)
+	err = ioutil.WriteFile(outputDir+publishDate+".md", []byte(article), 0644)
 	if err != nil {
 		return err
 	}
