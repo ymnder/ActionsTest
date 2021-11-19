@@ -33,4 +33,4 @@ jobs:
         git add file3.md
         git commit -m "tmp2"
         #hub push origin fix/tmp
-        hub pull-request -p --base OWNER:main --draft -m test title
+        hub pull-request -p --draft -m test title
