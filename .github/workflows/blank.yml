@@ -25,14 +25,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo ${GITHUB_REF_NAME}
-        # git config user.name  "[bot] ${GITHUB_ACTOR}"
-        # git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        # git switch -c fix/tmp3
-        #  go run ./action.go -date=12/01 -title=tmp
-        # touch file3.md
-        # git add file3.md
-        # git commit -m "tmp2"
-        # # hub push origin fix/tmp2
-        # # git switch -
-        # hub pull-request -p -b main -m test title
+         go run ./action.go \
+           -date=${{ github.event.inputs.date }} \
+           -title=${{ github.event.inputs.title }} \
+           -author=${{ github.event.inputs.author }}

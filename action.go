@@ -55,8 +55,12 @@ func createFile(publishDate string, title string, author string) error {
 
 	article := strings.Replace(string(template), "[date]", publishDate, -1)
 	article = strings.Replace(article, "[date_label]", publishDateForLabel, -1)
-	article = strings.Replace(article, "[title]", title, -1)
-	article = strings.Replace(article, "[author]", author, -1)
+	if len(title) > 0 {
+		article = strings.Replace(article, "[title]", title, -1)
+	}
+	if len(author) > 0 {
+		article = strings.Replace(article, "[author]", author, -1)
+	}
 
 	err = os.WriteFile(outputDir+publishDate+".md", []byte(article), 0644)
 	if err != nil {
