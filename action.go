@@ -1,17 +1,20 @@
 package main
 
 import (
-	"bufio"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
 )
 
-var scanner = bufio.NewScanner(os.Stdin)
-
 func main() {
 
 	fmt.Println("---------------------------")
+	err := errors.New("hello.")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "failed executing command with error %v\n", err)
+		os.Exit(1)
+	}
 
 	i := flag.String("date", "", "date")
 	s := flag.String("title", "", "title")
