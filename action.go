@@ -18,11 +18,7 @@ func main() {
 	flag.Parse()
 	fmt.Println(*i, *s, *b)
 
-	output, err := exec.Command("git", "switch", "master").CombinedOutput()
-	if err != nil {
-		exitProcess(output, err)
-	}
-	output, err = exec.Command("git", "switch", "-c", "tmp/a").CombinedOutput()
+	output, err := exec.Command("git", "switch", "-c", "tmp/a").CombinedOutput()
 	if err != nil {
 		exitProcess(output, err)
 	}
