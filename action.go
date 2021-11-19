@@ -31,7 +31,7 @@ func main() {
 		return
 	}
 
-	createBranch(publishDate)
+	// createBranch(publishDate)
 }
 
 func parseDate(inputDate string) string {
@@ -46,7 +46,7 @@ func parseDate(inputDate string) string {
 func createFile(publishDate string, title string, author string) error {
 	publishDateForLabel := publishDate
 	if strings.HasPrefix(publishDate, "0") {
-		publishDateForLabel = publishDate
+		publishDateForLabel = publishDate[1:]
 	}
 
 	template, err := ioutil.ReadFile(templateFile)
