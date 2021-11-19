@@ -32,5 +32,5 @@ jobs:
         touch file2.md
         git add file2.md
         git commit -m "tmp2"
-        hub push origin
+        hub push origin fix/tmp
         hub pull-request --draft -m test title
