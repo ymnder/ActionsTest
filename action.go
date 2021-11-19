@@ -88,7 +88,7 @@ func createBranch(publishDate string) {
 	runCommand("git", "add", outputDir+publishDate+".md")
 	runCommand("git", "commit", "-m", "Add a template")
 	runCommand("git", "push", "origin", targetBranch)
-	runCommand("gh", "pr", "create", "--title", publishDate+" Article", "--base", "${GITHUB_REF_NAME}")
+	runCommand("gh", "pr", "create", "--title", "\""+publishDate+" Article\"", "--base", "$GITHUB_REF_NAME")
 }
 
 func exitProcessWithMessage(message string) {
