@@ -24,6 +24,7 @@ jobs:
     - name: run
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REF_NAME: $GITHUB_REF_NAME
       run: |
          echo "${GITHUB_REF_NAME}"
          echo ${GITHUB_REF_NAME}
