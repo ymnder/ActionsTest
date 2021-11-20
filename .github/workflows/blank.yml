@@ -21,10 +21,16 @@ jobs:
         echo "date: ${{ github.event.inputs.date }}"
         echo "title: ${{ github.event.inputs.title }}"
         echo "author: ${{ github.event.inputs.author }}"
+    - name: keep env
+      id: keep-env
+      run: |
+        echo "::set-output name=ACTOR::${GITHUB_ACTOR}"
+        ${{ steps.keep-env.outputs.ACTOR }}
     - name: run
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+         echo ${{ steps.keep-env.outputs.ACTOR }}
          go run ./action.go \
            -date=${{ github.event.inputs.date }} \
            -title=${{ github.event.inputs.title }} \
