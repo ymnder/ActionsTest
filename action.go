@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -15,23 +16,28 @@ const (
 	branchPrefix = "tmp/"
 )
 
+type user struct {
+	name string
+	mail string
+}
+
 func main() {
-	runCommand("echo", "${{ steps.keep-env.outputs.ACTOR }}")
-	// dateArg := flag.String("date", "", "date")
-	// titleArg := flag.String("title", "", "title")
-	// authorArg := flag.String("author", "", "author")
+	dateArg := flag.String("date", "", "date")
+	titleArg := flag.String("title", "", "title")
+	authorArg := flag.String("author", "", "author")
+	userNameArg := flag.String("username", "", "username")
 
-	// flag.Parse()
-	// fmt.Println(*dateArg, *titleArg, *authorArg)
+	flag.Parse()
+	fmt.Println(*dateArg, *titleArg, *authorArg, *userNameArg)
 
-	// publishDate := parseDate(*dateArg)
-	// fileError := createFile(publishDate, *titleArg, *authorArg)
-	// if fileError != nil {
-	// 	exitProcessWithError(fileError)
-	// 	return
-	// }
-
-	// createBranch(publishDate)
+	publishDate := parseDate(*dateArg)
+	fileError := createFile(publishDate, *titleArg, *authorArg)
+	if fileError != nil {
+		exitProcessWithError(fileError)
+		return
+	}
+	user := createUser(*userNameArg)
+	createBranch(publishDate, user)
 }
 
 func parseDate(inputDate string) string {
@@ -41,6 +47,13 @@ func parseDate(inputDate string) string {
 		exitProcessWithMessage("\u2717 12/01のような形式で日付を入力してください")
 	}
 	return publishDate[1]
+}
+
+func createUser(inputUserName string) user {
+	return user{
+		name: "[bot] " + inputUserName,
+		mail: inputUserName + "@users.noreply.github.com",
+	}
 }
 
 func createFile(publishDate string, title string, author string) error {
@@ -80,10 +93,10 @@ func runCommand(name string, args ...string) {
 	}
 }
 
-func createBranch(publishDate string) {
+func createBranch(publishDate string, user user) {
 	targetBranch := branchPrefix + publishDate
-	runCommand("git", "config", "user.name", "[bot] ${{ steps.keep-env.outputs.ACTOR }}")
-	runCommand("git", "config", "user.email", "${{ steps.keep-env.outputs.ACTOR }}@users.noreply.github.com")
+	runCommand("git", "config", "user.name", user.name)
+	runCommand("git", "config", "user.email", user.mail)
 	runCommand("git", "switch", "-c", targetBranch)
 	runCommand("git", "add", outputDir+publishDate+".md")
 	runCommand("git", "commit", "-m", "Add a template")
