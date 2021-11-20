@@ -16,7 +16,7 @@ const (
 )
 
 func main() {
-	runCommand("echo", "${ env.GITHUB_REF_NAME }")
+	runCommand("echo", "${{ env.GITHUB_REF_NAME }}")
 	// dateArg := flag.String("date", "", "date")
 	// titleArg := flag.String("title", "", "title")
 	// authorArg := flag.String("author", "", "author")
