@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -17,21 +16,22 @@ const (
 )
 
 func main() {
-	dateArg := flag.String("date", "", "date")
-	titleArg := flag.String("title", "", "title")
-	authorArg := flag.String("author", "", "author")
+	runCommand("echo", "${ env.GITHUB_REF_NAME }")
+	// dateArg := flag.String("date", "", "date")
+	// titleArg := flag.String("title", "", "title")
+	// authorArg := flag.String("author", "", "author")
 
-	flag.Parse()
-	fmt.Println(*dateArg, *titleArg, *authorArg)
+	// flag.Parse()
+	// fmt.Println(*dateArg, *titleArg, *authorArg)
 
-	publishDate := parseDate(*dateArg)
-	fileError := createFile(publishDate, *titleArg, *authorArg)
-	if fileError != nil {
-		exitProcessWithError(fileError)
-		return
-	}
+	// publishDate := parseDate(*dateArg)
+	// fileError := createFile(publishDate, *titleArg, *authorArg)
+	// if fileError != nil {
+	// 	exitProcessWithError(fileError)
+	// 	return
+	// }
 
-	createBranch(publishDate)
+	// createBranch(publishDate)
 }
 
 func parseDate(inputDate string) string {
@@ -88,7 +88,7 @@ func createBranch(publishDate string) {
 	runCommand("git", "add", outputDir+publishDate+".md")
 	runCommand("git", "commit", "-m", "Add a template")
 	runCommand("git", "push", "origin", targetBranch)
-	runCommand("gh", "pr", "create", "--title", "\""+publishDate+" Article\"", "--base", "$GITHUB_REF_NAME")
+	runCommand("gh", "pr", "create", "--title", "\""+publishDate+" Article\"", "--body", "\"\"", "--base", "${{GITHUB_REF_NAME}}")
 }
 
 func exitProcessWithMessage(message string) {
